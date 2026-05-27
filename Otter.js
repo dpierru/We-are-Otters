@@ -9,7 +9,7 @@ export default class Otter {
         this.body = []
         this.body.push(new Circle(x, y, 30, 'rgba(255, 255, 255, 1)'))
         this.body.push(new Circle(x, y, 50, 'rgb(255, 255, 255)', this.body[0]))
-        this.body.push(new Circle(x, y, 50, 'rgb(255, 255, 255)', this.body[1]))
+        this.body.push(new Circle(x, y, 40, 'rgb(255, 255, 255)', this.body[1]))
         this.body.push(new Circle(x, y, 30, 'rgb(255, 255, 255)', this.body[2]))
         this.body.push(new Circle(x, y, 20, 'rgb(255, 255, 255)', this.body[3]))
         this.body.push(new Circle(x, y, 10, 'rgb(255, 255, 255)', this.body[4]))
@@ -17,6 +17,13 @@ export default class Otter {
 
         this.targetX = x
         this.targetY = y
+
+
+        this.vx = 0;
+        this.vy = 0;
+
+        this.maxSpeed = 2;
+        this.maxForce = 0.1;
     }
 
     getX() {

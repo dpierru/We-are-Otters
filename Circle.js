@@ -22,7 +22,7 @@ export default class Circle {
 
         const targetAngle = Math.atan2(dy, dx);
 
-        const maxTurn = 0.2; // rad/frame (ajuste ici)
+        const maxTurn = 0.3; // rad/frame (ajuste ici)
 
         this.angle = Utils.clampAngle(this.angle, targetAngle, maxTurn);
 

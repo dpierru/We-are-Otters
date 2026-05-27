@@ -1,0 +1,15 @@
+Le calcul des coordonnées quand la loutre à atteint son point est complètement random :
+
+A refaire : 
+    Option 1 :  un système de vecteur contraint par un "cone" :
+                Il choisi sa destination, mais ne peux pas faire plus que x angl
+    Option 2 :  il y a un point cible invisible qui "s'incrémente" pour bouger, la loutre
+                suit ce point.
+
+Dans les deux cas, comment gérer l'arrivée de la souris ? 
+Comment gérer des "rochers" ? 
+Il faudrait aussi des variations de vitesse. 
+
+Une fois le squelette créé, il faudrait pouvoir "dessiner la loutre". 
+
+Idée : faire un background d'étoiles. 
