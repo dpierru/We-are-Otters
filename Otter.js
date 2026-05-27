@@ -1,0 +1,82 @@
+import Circle from "./Circle.js"
+
+export default class Otter {
+
+    constructor(x, y, painter) {
+        this.painter = painter
+        this.speed = 2
+
+        this.body = []
+        this.body.push(new Circle(x, y, 30, 'rgba(255, 255, 255, 1)'))
+        this.body.push(new Circle(x, y, 50, 'rgb(255, 255, 255)', this.body[0]))
+        this.body.push(new Circle(x, y, 50, 'rgb(255, 255, 255)', this.body[1]))
+        this.body.push(new Circle(x, y, 30, 'rgb(255, 255, 255)', this.body[2]))
+        this.body.push(new Circle(x, y, 20, 'rgb(255, 255, 255)', this.body[3]))
+        this.body.push(new Circle(x, y, 10, 'rgb(255, 255, 255)', this.body[4]))
+
+
+        this.targetX = x
+        this.targetY = y
+    }
+
+    getX() {
+        return this.body[0].x        
+    }
+
+    getY() {
+        return this.body[0].y
+    }
+
+    setX(x) {
+        this.body[0].x = x
+    }
+
+    setY(y) {
+        this.body[0].y = y
+    }
+
+    addX(x) {
+        this.body[0].x += x
+    }
+
+    addY(y) {
+        this.body[0].y += y
+    }
+
+    moveOtter() {
+        let dx = this.targetX - this.getX()
+        let dy = this.targetY - this.getY()
+        
+        let dist = Math.sqrt(dx * dx + dy * dy)
+
+        if (dist > this.speed) { // seuil pour éviter jitter
+            dx /= dist;
+            dy /= dist;
+
+            this.addX(dx * this.speed)
+            this.addY(dy * this.speed)
+
+            for (let circle of this.body) {
+                circle.calculateNewCoordinate()
+            }
+            
+        } else {
+            this.calculateNewCoordinate()
+        }
+    }
+
+    calculateNewCoordinate() {
+        ({ x: this.targetX, y: this.targetY } = this.painter.getRandomPoint());
+        console.log("new target", this.targetX, this.targetY)
+        
+    }
+
+    draw() {
+        //console.log(this.x, this.y)
+        for (let circle of this.body) {
+            this.painter.drawCircle(circle.x, circle.y, circle.radius, circle.color)
+        }
+
+        
+    }
+}
