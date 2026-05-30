@@ -1,30 +1,41 @@
-import Painter from "./Painter.js"
+import Renderer from "./Renderer.js"
 import Otter from "./Otter.js"
+import Vector2 from "./Vector2.js"
+import Eel from "./Eel.js"
+import World from "./World.js"
+import Utils from "./Utils.js"
 
 export default class Game {
-
-
 
     constructor() {
         // Initialisation du canvas (id = main)
         this.canvas = document.getElementById('main')
         this.ctx = this.canvas.getContext('2d')
 
+        this.world = new World()
+
         this.initCanvas()
         this.initEventListener()
 
-        // Initialisation du helper Draw
-        this.painter = new Painter(this.ctx)
-
-        this.otter = new Otter(100, 100, this.painter)
-
+        this.renderer = new Renderer(this.ctx)
+        this.eelList = []
+        // for (let i = 0; i < 10; i++) {
+        //     this.eelList.push(
+        //         new Eel(
+        //             Utils.getRandomInt(0, this.world.width),
+        //             Utils.getRandomInt(0, this.world.height)
+        //         )
+        //     )
+        // } 
+        this.eel = new Eel(100, 100, "white")
+       
         this.startGame()
     }
 
     initEventListener() {
         window.addEventListener('resize', () => this.initCanvas())
-        //window.addEventListener('click', (e) => this.moveOtter(e.clientX, e.clientY))
-        window.addEventListener('mousemove', (e) => this.moveOtter(e.clientX, e.clientY))
+        window.addEventListener('click', (e) => this.eel.applyDirection(new Vector2(e.clientX, e.clientY)))
+        //window.addEventListener('mousemove', (e) => this.moveOtter(e.clientX, e.clientY))
     }
 
 
@@ -40,49 +51,43 @@ export default class Game {
 
         this.ctx.scale(dpr, dpr);
 
-        this.initWorld()
+        this.world.width = this.canvas.width
+        this.world.height = this.canvas.height
     }
-
-    initWorld() {
-        // Applique la couleur bleu marine au background
-        this.ctx.fillStyle = 'rgb(22, 14, 36)'
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-    }
-
-    emptyWorld() {
-        this.ctx.fillStyle = 'rgb(22, 14, 36)'
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-    }
-
 
     startGame() {
         this.lastTime = performance.now();
 
         const loop = (now) => {
-            const delta = (now - this.lastTime) / 1000; // en secondes
-            this.lastTime = now;
+            const delta = (now - this.lastTime) / 1000
+            this.lastTime = now
 
-            this.update(delta);
-            this.render();
+            this.update(delta)
+            this.render()
 
-            requestAnimationFrame(loop);
+            requestAnimationFrame(loop)
         };
 
-        requestAnimationFrame(loop);
+        requestAnimationFrame(loop)
     }
 
     update(delta) {
-        this.otter.moveOtter(delta);
+        this.eel.update(delta)
+        this.eel.handleBounds(this.world.getBounds())
+
+        //for (let i = 0; i < 10; i++) this.eelList[i].update(delta)
+        // for (let eel of this.eelList) {
+        //     eel.update(delta)
+        //     eel.handleBounds(this.world.getBounds())
+        // }
+        
     }
 
     render() {
-        this.emptyWorld();
-        this.otter.draw();
-    }
-
-    moveOtter(x, y) {
-        console.log(x, y);
-        this.otter.targetX = x
-        this.otter.targetY = y
+        this.world.render(this.renderer)
+        this.eel.draw(this.renderer)
+        // for (let eel of this.eelList) {
+        //     eel.draw(this.renderer)
+        // }
     }
 }

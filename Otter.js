@@ -2,8 +2,8 @@ import Circle from "./Circle.js"
 
 export default class Otter {
 
-    constructor(x, y, painter) {
-        this.painter = painter
+    constructor(x, y, renderer) {
+        this.renderer = renderer
         this.speed = 2
 
         this.body = []
@@ -56,7 +56,7 @@ export default class Otter {
         
         let dist = Math.sqrt(dx * dx + dy * dy)
 
-        if (dist > this.speed) { // seuil pour éviter jitter
+        if (dist > this.speed * 4) { // seuil pour éviter jitter
             dx /= dist;
             dy /= dist;
 
@@ -68,12 +68,12 @@ export default class Otter {
             }
             
         } else {
-            this.calculateNewCoordinate()
+            this.calculateNewTarget()
         }
     }
 
-    calculateNewCoordinate() {
-        ({ x: this.targetX, y: this.targetY } = this.painter.getRandomPoint());
+    calculateNewTarget() {
+        ({ x: this.targetX, y: this.targetY } = this.renderer.getRandomPoint());
         console.log("new target", this.targetX, this.targetY)
         
     }
@@ -81,7 +81,7 @@ export default class Otter {
     draw() {
         //console.log(this.x, this.y)
         for (let circle of this.body) {
-            this.painter.drawCircle(circle.x, circle.y, circle.radius, circle.color)
+            this.renderer.drawCircle(circle.x, circle.y, circle.radius, circle.color)
         }
 
         
