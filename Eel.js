@@ -12,9 +12,10 @@ export default class Eel {
         this.target = new Vector2(500, 500)
         this.maxTurn = 0.01
         this.wiggleOffset = new Vector2(0, 0)
+        this.offset = 150 // Distance des murs et des obstacles
 
         this.frequency = 3
-        this.amplitude = 0.5
+        this.amplitude = 1
 
         this.color = color
         if (color === "") {
@@ -25,10 +26,9 @@ export default class Eel {
 
     // Détermine si on est proche des murs.
     isNearWall(bounds) {
-        const margin = 150
         const x = this.position.x
         const y = this.position.y
-        let isNear = x < margin || x > bounds.width - margin || y < margin || y > bounds.height - margin
+        let isNear = x < this.offset || x > bounds.width - this.offset || y < this.offset || y > bounds.height - this.offset
         console.log("Near Wall : ", isNear);
 
         return isNear
@@ -95,8 +95,8 @@ export default class Eel {
             console.log("Bounds", bounds);
 
             this.target = new Vector2(
-                Utils.getRandomInt(150, bounds.width - 150),
-                Utils.getRandomInt(150, bounds.height - 150)
+                Utils.getRandomInt(150, bounds.width - this.offset),
+                Utils.getRandomInt(150, bounds.height - this.offset)
             )
             console.log("this.target : ", this.target);
 

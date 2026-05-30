@@ -4,6 +4,13 @@ import Vector2 from "./Vector2.js"
 import Eel from "./Eel.js"
 import World from "./World.js"
 import Utils from "./Utils.js"
+import Actor from "./Actor.js"
+import Behavior from "./WiggleBehavior.js"
+import WiggleBehavior from "./WiggleBehavior.js"
+import MovingBehavior from "./MovingBehavior.js"
+import SteeringBehavior from "./SteeringBehavior.js"
+import BoundaryBehavior from "./BoundaryBehavior.js"
+import DebugBehavior from "./DebugBehavior.js"
 
 export default class Game {
 
@@ -18,7 +25,7 @@ export default class Game {
         this.initEventListener()
 
         this.renderer = new Renderer(this.ctx)
-        this.eelList = []
+        // this.eelList = []
         // for (let i = 0; i < 10; i++) {
         //     this.eelList.push(
         //         new Eel(
@@ -27,7 +34,13 @@ export default class Game {
         //         )
         //     )
         // } 
-        this.eel = new Eel(100, 100, "white")
+        //this.eel = new Eel(100, 100, "white")
+        this.eel = new Actor()
+        this.eel.add(new SteeringBehavior())
+        this.eel.add(new BoundaryBehavior(this.canvas.width, this.canvas.height))
+        this.eel.add(new MovingBehavior(200))
+        this.eel.add(new WiggleBehavior(0.5, 5))
+        this.eel.add(new DebugBehavior(true, "random"))
        
         this.startGame()
     }
@@ -73,7 +86,7 @@ export default class Game {
 
     update(delta) {
         this.eel.update(delta)
-        this.eel.handleBounds(this.world.getBounds())
+        ///////////////// this.eel.handleBounds(this.world.getBounds())
 
         //for (let i = 0; i < 10; i++) this.eelList[i].update(delta)
         // for (let eel of this.eelList) {
