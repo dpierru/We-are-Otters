@@ -9,6 +9,8 @@ export default class InputSystem {
     }
 
     handleClick(e) {
+        console.log("Click dans le canvas !")
+        
         const rect = this.canvas.getBoundingClientRect()
 
         const pos = {

@@ -15,15 +15,23 @@ export default class Actor {
         this.behaviors.push(behavior)
     }
 
+    attachToWorld(world) {
+        this.world = world
+        this.eventBus = this.world.eventBus // Raccourci. 
+        for (const behavior of this.behaviors) {
+            behavior.initWorldAttachement?.()
+        }
+    }
+
     update(dt) {
-        for (const c of this.behaviors) {
-            c.update?.(dt, this)
+        for (const behavior of this.behaviors) {
+            behavior.update?.(dt, this)
         }
     }
 
     render(renderer) {       
-        for (const c of this.behaviors) {
-            c.draw?.(renderer, this)
+        for (const behavior of this.behaviors) {
+            behavior.draw?.(renderer, this)
         }
 
         const ctx = renderer.ctx
@@ -34,8 +42,5 @@ export default class Actor {
         ctx.arc(this.position.x, this.position.y, 10, 0, Math.PI * 2)
         
         ctx.fill()
-
-        // this.target.drawPoint(ctx, this.color || "white")
-        // this.velocity.draw(ctx, this.position.x, this.position.y, this.color || "white")
     }
 }

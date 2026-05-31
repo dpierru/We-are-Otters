@@ -11,32 +11,26 @@ import MovingBehavior from "./Behaviors/MovingBehavior.js"
 import SteeringBehavior from "./Behaviors/SteeringBehavior.js"
 import BoundaryBehavior from "./Behaviors/BoundaryBehavior.js"
 import DebugBehavior from "./Behaviors/DebugBehavior.js"
+import EventBus from "./Services/EventBus.js"
 
 
 export default class Game {
 
     constructor() {
+        this.eventBus = new EventBus()
+
         // Initialisation du canvas (id = main)
         this.canvas = document.getElementById('main')
         this.ctx = this.canvas.getContext('2d')
 
-        this.world = new World()
         this.inputSystem = new InputSystem(this.canvas)
+        this.world = new World(this.eventBus)
 
         this.initCanvas()
         this.initEventListener()
 
         this.renderer = new Renderer(this.ctx)
-        // this.eelList = []
-        // for (let i = 0; i < 10; i++) {
-        //     this.eelList.push(
-        //         new Eel(
-        //             Utils.getRandomInt(0, this.world.width),
-        //             Utils.getRandomInt(0, this.world.height)
-        //         )
-        //     )
-        // } 
-        //this.eel = new Eel(100, 100, "white")
+
         let eel = new Actor()
         eel.add(new SteeringBehavior())
         eel.add(new BoundaryBehavior())
@@ -57,10 +51,7 @@ export default class Game {
 
 
     initCanvas() {
-        console.log("init canvas")
-
         const dpr = window.devicePixelRatio || 1;
-        console.log("dpr", dpr);
         const rect = this.canvas.getBoundingClientRect();
         this.canvas.width = rect.width * dpr;
         this.canvas.height = rect.height * dpr;
@@ -88,22 +79,9 @@ export default class Game {
 
     update(delta) {
         this.world.update(delta)
-        //this.eel.update(delta)
-        ///////////////// this.eel.handleBounds(this.world.getBounds())
-
-        //for (let i = 0; i < 10; i++) this.eelList[i].update(delta)
-        // for (let eel of this.eelList) {
-        //     eel.update(delta)
-        //     eel.handleBounds(this.world.getBounds())
-        // }
-        
     }
 
     render() {
         this.world.render(this.renderer)
-        
-        // for (let eel of this.eelList) {
-        //     eel.draw(this.renderer)
-        // }
     }
 }

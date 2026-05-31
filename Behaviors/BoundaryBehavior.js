@@ -7,10 +7,19 @@ export default class BoundaryBehavior extends Behavior {
         super()
         this.offset = offset
         this.startTurning = false
+        this.forceCalculateNewTarget = true
     }
 
     get bounds() {
         return this.owner.world.bounds
+    }
+
+    initWorldAttachement() {
+        this.eventBus.on('boundsUpdated', () => {
+            console.log("BoundUpdated (Boundary)");
+            
+            this.forceCalculateNewTarget = true
+        })
     }
 
     isNearWall() {
@@ -31,6 +40,9 @@ export default class BoundaryBehavior extends Behavior {
     }
 
     shouldCalcultateNewTarget() {
+        if (this.forceCalculateNewTarget) {
+            return true
+        }
         if (this.isNearWall() && this.startTurning === false) {
             return true
         }
@@ -41,14 +53,19 @@ export default class BoundaryBehavior extends Behavior {
         return false
     }
 
+    calculateNewTarget() {
+        this.owner.target = new Vector2(
+            Utils.getRandomInt(150, this.bounds.width - this.offset),
+            Utils.getRandomInt(150, this.bounds.height - this.offset)
+        )
+        this.forceCalculateNewTarget = false
+    }
+
     handleBounds() {
         if (this.shouldCalcultateNewTarget()) {
             this.startTurning = true
 
-            this.owner.target = new Vector2(
-                Utils.getRandomInt(150, this.bounds.width - this.offset),
-                Utils.getRandomInt(150, this.bounds.height - this.offset)
-            )
+            this.calculateNewTarget()
             console.log("this.owner.target : ", this.owner.target);
 
         } else if (this.isNearWall() === false) {
@@ -58,10 +75,6 @@ export default class BoundaryBehavior extends Behavior {
     }
 
     update() {
-        const x = this.owner.position.x
-        const y = this.owner.position.y
-        //console.log(x, y);
-
         this.handleBounds()
     }
 }
