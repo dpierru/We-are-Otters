@@ -38,8 +38,9 @@ export default class Game {
         this.eel = new Actor()
         this.eel.add(new SteeringBehavior())
         this.eel.add(new BoundaryBehavior(this.canvas.width, this.canvas.height))
-        this.eel.add(new MovingBehavior(200))
+        this.eel.add(new MovingBehavior(300))
         this.eel.add(new WiggleBehavior(0.5, 5))
+        //this.eel.add(new WiggleBehavior(0.8, 2))
         this.eel.add(new DebugBehavior(true, "random"))
        
         this.startGame()

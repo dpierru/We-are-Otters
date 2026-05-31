@@ -1,7 +1,7 @@
 import Behavior from "./Behavior.js"
 
 export default class MovingBehavior extends Behavior {
-    constructor(maxSpeed = 500) {
+    constructor(maxSpeed = 300) {
         super()
         this.maxSpeed = maxSpeed
     }
@@ -9,7 +9,7 @@ export default class MovingBehavior extends Behavior {
     update(dt) {
         const speed = this.owner.velocity.length()
 
-        if (speed > this.maxSpeed) {
+        if (speed >= this.maxSpeed) {
             this.owner.velocity.multiply(this.maxSpeed / speed)
         }
 
