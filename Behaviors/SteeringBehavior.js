@@ -1,4 +1,4 @@
-import Behavior from "./Behavior.js"
+import Behavior from "../Core/Behavior.js"
 
 // Steering : orienter. 
 // C'est le comportement qui permet de se diriger vers la target. 

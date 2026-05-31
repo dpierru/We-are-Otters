@@ -1,5 +1,5 @@
-import Behavior from "./Behavior.js"
-import Vector2 from "../Vector2.js"
+import Behavior from "../Core/Behavior.js"
+import Vector2 from "../Core/Vector2.js"
 
 export default class WiggleBehavior extends Behavior {
     constructor(amplitude = 1, frequency = 3) {

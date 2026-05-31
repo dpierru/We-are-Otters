@@ -1,4 +1,4 @@
-import Behavior from "./Behavior.js"
+import Behavior from "../Core/Behavior.js"
 import Utils from "../Services/Utils.js"
 
 export default class DebugBehavior extends Behavior {

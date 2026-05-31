@@ -1,20 +1,20 @@
 import Renderer from "./Renderer.js"
-import Otter from "./Otter.js"
-import Vector2 from "./Vector2.js"
-import Eel from "./Eel.js"
+import Otter from "../Archives/Otter.js"
+import Vector2 from "../Core/Vector2.js"
+import Eel from "../Archives/Eel.js"
 import World from "./World.js"
-import Actor from "./Actor.js"
+import Actor from "../Core/Actor.js"
 import InputSystem from "./InputSystem.js"
-import Behavior from "./Behaviors/Behavior.js"
-import WiggleBehavior from "./Behaviors/WiggleBehavior.js"
-import MovingBehavior from "./Behaviors/MovingBehavior.js"
-import SteeringBehavior from "./Behaviors/SteeringBehavior.js"
-import BoundaryBehavior from "./Behaviors/BoundaryBehavior.js"
-import DebugBehavior from "./Behaviors/DebugBehavior.js"
-import EventBus from "./Services/EventBus.js"
+import Behavior from "../Core/Behavior.js"
+import WiggleBehavior from "../Behaviors/WiggleBehavior.js"
+import MovingBehavior from "../Behaviors/MovingBehavior.js"
+import SteeringBehavior from "../Behaviors/SteeringBehavior.js"
+import BoundaryBehavior from "../Behaviors/BoundaryBehavior.js"
+import DebugBehavior from "../Behaviors/DebugBehavior.js"
+import EventBus from "../Core/EventBus.js"
 
 
-export default class Game {
+export default class App {
 
     constructor() {
         this.eventBus = new EventBus()

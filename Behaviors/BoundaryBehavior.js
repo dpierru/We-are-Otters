@@ -1,5 +1,5 @@
-import Behavior from "./Behavior.js"
-import Vector2 from "../Vector2.js"
+import Behavior from "../Core/Behavior.js"
+import Vector2 from "../Core/Vector2.js"
 import Utils from "../Services/Utils.js"
 
 export default class BoundaryBehavior extends Behavior {

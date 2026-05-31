@@ -1,4 +1,4 @@
-import Behavior from "./Behavior.js"
+import Behavior from "../Core/Behavior.js"
 
 export default class MovingBehavior extends Behavior {
     constructor(maxSpeed = 300) {

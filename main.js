@@ -1,3 +1,3 @@
-import Game from "./Game.js"
+import App from "./Engine/App.js"
 
-let game = new Game()
+let app = new App()
