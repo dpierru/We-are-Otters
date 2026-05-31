@@ -20,6 +20,10 @@ export default class BoundaryBehavior extends Behavior {
             
             this.forceCalculateNewTarget = true
         })
+
+        this.eventBus.on("clickInWorld", (event) => {
+            this.forceNewTarget(event.x, event.y)
+        })
     }
 
     isNearWall() {
@@ -53,7 +57,12 @@ export default class BoundaryBehavior extends Behavior {
         return false
     }
 
-    calculateNewTarget() {
+    forceNewTarget(x, y) {
+        this.owner.target = new Vector2(x, y)
+        this.forceCalculateNewTarget = false
+    }
+
+    calculateNewTarget(x, y) {
         this.owner.target = new Vector2(
             Utils.getRandomInt(150, this.bounds.width - this.offset),
             Utils.getRandomInt(150, this.bounds.height - this.offset)
@@ -66,7 +75,7 @@ export default class BoundaryBehavior extends Behavior {
             this.startTurning = true
 
             this.calculateNewTarget()
-            console.log("this.owner.target : ", this.owner.target);
+            //console.log("this.owner.target : ", this.owner.target);
 
         } else if (this.isNearWall() === false) {
             this.startTurning = false

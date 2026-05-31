@@ -1,29 +1,28 @@
 export default class InputSystem {
-    constructor(canvas) {
+    constructor(eventBus, canvas) {
         this.canvas = canvas
+        this.eventBus = eventBus
         this.clickInWorldListeners = []
         
         canvas.addEventListener("click", (e) => {
-            this.handleClick(e)
+            this.handleClickInCanvas(e)
         })
     }
 
-    handleClick(e) {
-        console.log("Click dans le canvas !")
+    handleClickInCanvas(e) {
+        this.eventBus.emit("clickInWorld", e)
         
-        const rect = this.canvas.getBoundingClientRect()
+        // console.log("Click dans le canvas !")
+        
+        // const rect = this.canvas.getBoundingClientRect()
 
-        const pos = {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        }
+        // const pos = {
+        //     x: e.clientX - rect.left,
+        //     y: e.clientY - rect.top
+        // }
 
-        for (const fn of this.clickInWorldListeners) {
-            fn(pos)
-        }
-    }
-
-    onClickInWorld(fn) {
-        this.clickInWorldListeners.push(fn)
+        // for (const fn of this.clickInWorldListeners) {
+        //     fn(pos)
+        // }
     }
 }

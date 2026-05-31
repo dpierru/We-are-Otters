@@ -23,7 +23,7 @@ export default class Game {
         this.canvas = document.getElementById('main')
         this.ctx = this.canvas.getContext('2d')
 
-        this.inputSystem = new InputSystem(this.canvas)
+        this.inputSystem = new InputSystem(this.eventBus, this.canvas)
         this.world = new World(this.eventBus)
 
         this.initCanvas()

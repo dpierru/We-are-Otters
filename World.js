@@ -15,8 +15,6 @@ export default class World {
     add(actor) {
         console.log("Acteur ajouté : ", actor)
         actor.attachToWorld(this)
-
-        
         this.actors.push(actor)
     }
 
