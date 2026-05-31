@@ -21,9 +21,7 @@ export default class Actor {
         }
     }
 
-    render(renderer) {
-        console.log("render actor");
-        
+    render(renderer) {       
         for (const c of this.behaviors) {
             c.draw?.(renderer, this)
         }

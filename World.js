@@ -33,8 +33,6 @@ export default class World {
         ctx.fillRect(0, 0, this.bounds.width, this.bounds.height)
 
         for (const actor of this.actors) {
-            console.log(actor);
-            
             actor.render(renderer)
         }
     }
