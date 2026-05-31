@@ -65,8 +65,9 @@ export default class Game {
         this.canvas.width = rect.width * dpr;
         this.canvas.height = rect.height * dpr;
 
-        this.world.setBounds(rect.width * dpr, rect.height * dpr)
-        this.ctx.scale(dpr, dpr);
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+        this.ctx.scale(dpr, dpr)
+        this.world.setBounds(rect.width, rect.height)
     }
 
     startGame() {
