@@ -4,8 +4,7 @@ export default class Behavior {
     }
 
     setOwner(actor) {
-        console.log("Set onwer : ", actor);
-        
+        console.log("Set owner : ", actor);
         this.owner = actor
     }
 

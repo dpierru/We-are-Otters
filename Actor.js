@@ -1,6 +1,8 @@
 import Vector2 from "./Vector2.js"
 
 export default class Actor {
+    world = null
+
     constructor() {
         this.position = new Vector2(200, 200)
         this.velocity = new Vector2(100, 100)
@@ -19,7 +21,9 @@ export default class Actor {
         }
     }
 
-    draw(renderer) {
+    render(renderer) {
+        console.log("render actor");
+        
         for (const c of this.behaviors) {
             c.draw?.(renderer, this)
         }
@@ -30,6 +34,7 @@ export default class Actor {
 
         ctx.beginPath()
         ctx.arc(this.position.x, this.position.y, 10, 0, Math.PI * 2)
+        
         ctx.fill()
 
         // this.target.drawPoint(ctx, this.color || "white")

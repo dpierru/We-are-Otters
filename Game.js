@@ -3,14 +3,15 @@ import Otter from "./Otter.js"
 import Vector2 from "./Vector2.js"
 import Eel from "./Eel.js"
 import World from "./World.js"
-import Utils from "./Utils.js"
 import Actor from "./Actor.js"
-import Behavior from "./WiggleBehavior.js"
-import WiggleBehavior from "./WiggleBehavior.js"
-import MovingBehavior from "./MovingBehavior.js"
-import SteeringBehavior from "./SteeringBehavior.js"
-import BoundaryBehavior from "./BoundaryBehavior.js"
-import DebugBehavior from "./DebugBehavior.js"
+import InputSystem from "./InputSystem.js"
+import Behavior from "./Behaviors/Behavior.js"
+import WiggleBehavior from "./Behaviors/WiggleBehavior.js"
+import MovingBehavior from "./Behaviors/MovingBehavior.js"
+import SteeringBehavior from "./Behaviors/SteeringBehavior.js"
+import BoundaryBehavior from "./Behaviors/BoundaryBehavior.js"
+import DebugBehavior from "./Behaviors/DebugBehavior.js"
+
 
 export default class Game {
 
@@ -20,6 +21,7 @@ export default class Game {
         this.ctx = this.canvas.getContext('2d')
 
         this.world = new World()
+        this.inputSystem = new InputSystem(this.canvas)
 
         this.initCanvas()
         this.initEventListener()
@@ -35,38 +37,36 @@ export default class Game {
         //     )
         // } 
         //this.eel = new Eel(100, 100, "white")
-        this.eel = new Actor()
-        this.eel.add(new SteeringBehavior())
-        this.eel.add(new BoundaryBehavior(this.canvas.width, this.canvas.height))
-        this.eel.add(new MovingBehavior(300))
-        this.eel.add(new WiggleBehavior(0.5, 5))
-        //this.eel.add(new WiggleBehavior(0.8, 2))
-        this.eel.add(new DebugBehavior(true, "random"))
+        let eel = new Actor()
+        eel.add(new SteeringBehavior())
+        eel.add(new BoundaryBehavior())
+        eel.add(new MovingBehavior(300))
+        eel.add(new WiggleBehavior(0.5, 5))
+        eel.add(new DebugBehavior(true, "random"))
        
+        this.world.add(eel)
+
         this.startGame()
     }
 
     initEventListener() {
         window.addEventListener('resize', () => this.initCanvas())
-        window.addEventListener('click', (e) => this.eel.applyDirection(new Vector2(e.clientX, e.clientY)))
+        //window.addEventListener('click', (e) => this.eel.applyDirection(new Vector2(e.clientX, e.clientY)))
         //window.addEventListener('mousemove', (e) => this.moveOtter(e.clientX, e.clientY))
     }
 
 
     initCanvas() {
-        console.log("init canvas");
+        console.log("init canvas")
 
         const dpr = window.devicePixelRatio || 1;
-
+        console.log("dpr", dpr);
         const rect = this.canvas.getBoundingClientRect();
-
         this.canvas.width = rect.width * dpr;
         this.canvas.height = rect.height * dpr;
 
+        this.world.setBounds(rect.width * dpr, rect.height * dpr)
         this.ctx.scale(dpr, dpr);
-
-        this.world.width = this.canvas.width
-        this.world.height = this.canvas.height
     }
 
     startGame() {
@@ -86,7 +86,8 @@ export default class Game {
     }
 
     update(delta) {
-        this.eel.update(delta)
+        this.world.update(delta)
+        //this.eel.update(delta)
         ///////////////// this.eel.handleBounds(this.world.getBounds())
 
         //for (let i = 0; i < 10; i++) this.eelList[i].update(delta)
@@ -99,7 +100,7 @@ export default class Game {
 
     render() {
         this.world.render(this.renderer)
-        this.eel.draw(this.renderer)
+        
         // for (let eel of this.eelList) {
         //     eel.draw(this.renderer)
         // }

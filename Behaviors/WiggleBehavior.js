@@ -1,5 +1,5 @@
 import Behavior from "./Behavior.js"
-import Vector2 from "./Vector2.js"
+import Vector2 from "../Vector2.js"
 
 export default class WiggleBehavior extends Behavior {
     constructor(amplitude = 1, frequency = 3) {
@@ -27,9 +27,5 @@ export default class WiggleBehavior extends Behavior {
 
     apply() {
         this.owner.position.add(this.offset)
-    }
-
-    draw(renderer) {
-        this.offset.drawPoint(renderer.ctx, "red")
     }
 }

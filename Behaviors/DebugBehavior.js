@@ -1,5 +1,5 @@
 import Behavior from "./Behavior.js"
-import Utils from "./Utils.js"
+import Utils from "../Services/Utils.js"
 
 export default class DebugBehavior extends Behavior {
 
@@ -14,7 +14,7 @@ export default class DebugBehavior extends Behavior {
         if (!this.showDebug) return
 
         const ctx = renderer.ctx
-        console.log("DEBUG");
+        //console.log("DEBUG");
         
         this.owner.target.drawPoint(ctx, this.color || "white")
         this.owner.velocity.draw(ctx, this.owner.position.x, this.owner.position.y, this.color || "white")

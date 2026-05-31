@@ -1,4 +1,4 @@
-import Utils from "./Utils.js"
+import Utils from "./Services/Utils.js"
 import Vector2 from "./Vector2.js"
 
 export default class Eel {
@@ -29,7 +29,7 @@ export default class Eel {
         const x = this.position.x
         const y = this.position.y
         let isNear = x < this.offset || x > bounds.width - this.offset || y < this.offset || y > bounds.height - this.offset
-        console.log("Near Wall : ", isNear);
+        //console.log("Near Wall : ", isNear);
 
         return isNear
     }

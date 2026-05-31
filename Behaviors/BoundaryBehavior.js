@@ -1,21 +1,22 @@
 import Behavior from "./Behavior.js"
-import Vector2 from "./Vector2.js"
-import Utils from "./Utils.js"
+import Vector2 from "../Vector2.js"
+import Utils from "../Services/Utils.js"
 
 export default class BoundaryBehavior extends Behavior {
-    constructor(width, height, offset = 150) {
+    constructor(offset = 150) {
         super()
-        this.width = width
-        this.height = height
         this.offset = offset
         this.startTurning = false
+    }
+
+    get bounds() {
+        return this.owner.world.bounds
     }
 
     isNearWall() {
         const x = this.owner.position.x
         const y = this.owner.position.y
-        let isNear = x < this.offset || x > this.width - this.offset || y < this.offset || y > this.height - this.offset
-        console.log("Near Wall : ", isNear);
+        let isNear = x < this.offset || x > this.bounds.width - this.bounds.offset || y < this.offset || y > this.bounds.height - this.offset
 
         return isNear
     }
@@ -45,8 +46,8 @@ export default class BoundaryBehavior extends Behavior {
             this.startTurning = true
 
             this.owner.target = new Vector2(
-                Utils.getRandomInt(150, this.width - this.offset),
-                Utils.getRandomInt(150, this.height - this.offset)
+                Utils.getRandomInt(150, this.bounds.width - this.offset),
+                Utils.getRandomInt(150, this.bounds.height - this.offset)
             )
             console.log("this.owner.target : ", this.owner.target);
 

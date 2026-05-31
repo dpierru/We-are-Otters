@@ -1,3 +1,5 @@
+console.log("loading Vector2 from:", import.meta.url)
+
 export default class Utils {
     static angleBetween(dx, dy) {
         return Math.atan2(dy, dx);
