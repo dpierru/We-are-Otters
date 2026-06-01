@@ -33,7 +33,7 @@ export default class EyeAttachment extends Attachment {
         const directionY = Math.sin(angle)
         
         ctx.beginPath()
-        ctx.fillStyle = "red"
+        ctx.fillStyle = "darkblue"
         ctx.arc(x, y, 4, 0, Math.PI * 2)
         ctx.fill()
 
