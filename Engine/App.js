@@ -33,10 +33,11 @@ export default class App {
         this.renderer = new Renderer(this.ctx)
 
         let eel = new Actor()
-        eel.add(new SteeringBehavior())
-        eel.add(new BoundaryBehavior())
+        eel.add(new SteeringBehavior(0.015))
+        eel.add(new BoundaryBehavior(200))
         eel.add(new MovingBehavior(300))
         eel.add(new WiggleBehavior(0.8, 5))
+        eel.add(new WiggleBehavior(0.5, 4))
         eel.add(new DebugBehavior(true, "random"))
         let eelSkin = new EelSkin()
         eel.setSkin(eelSkin)

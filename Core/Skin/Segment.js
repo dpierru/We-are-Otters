@@ -40,9 +40,6 @@ export default class Segment {
             
             const velocity = skin.actor.velocity
             this.angle = Math.atan2(velocity.y, velocity.x)
-            console.log("Angle : ", this.angle)
-                
-
         }
 
         if (this.parent) {

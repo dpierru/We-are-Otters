@@ -29,9 +29,19 @@ export default class EyeAttachment extends Attachment {
             this.offset.x * sin +
             this.offset.y * cos
 
+        const directionX = Math.cos(angle)
+        const directionY = Math.sin(angle)
+        
         ctx.beginPath()
         ctx.fillStyle = "red"
-        ctx.arc(x, y, 5, 0, Math.PI * 2)
+        ctx.arc(x, y, 4, 0, Math.PI * 2)
         ctx.fill()
+
+        ctx.beginPath()
+        ctx.fillStyle = "black"
+        ctx.arc(x + directionX, y + directionY, 3, 0, Math.PI * 2)
+        ctx.fill()
+
+        
     }
 }
