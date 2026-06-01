@@ -12,6 +12,7 @@ import SteeringBehavior from "../Behaviors/SteeringBehavior.js"
 import BoundaryBehavior from "../Behaviors/BoundaryBehavior.js"
 import DebugBehavior from "../Behaviors/DebugBehavior.js"
 import EventBus from "../Core/EventBus.js"
+import EelSkin from "../Skins/EelSkin.js"
 
 
 export default class App {
@@ -35,8 +36,10 @@ export default class App {
         eel.add(new SteeringBehavior())
         eel.add(new BoundaryBehavior())
         eel.add(new MovingBehavior(300))
-        eel.add(new WiggleBehavior(0.5, 5))
+        eel.add(new WiggleBehavior(0.8, 5))
         eel.add(new DebugBehavior(true, "random"))
+        let eelSkin = new EelSkin()
+        eel.setSkin(eelSkin)
        
         this.world.add(eel)
 

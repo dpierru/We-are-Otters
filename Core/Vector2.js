@@ -80,7 +80,7 @@ export default class Vector2 {
         // On sauvegarde le contexte pour ne pas faire des modifs involontaires
         ctx.save()
 
-        let scale = 0.5
+        let scale = 0.3
 
         // On force la couleur en blanc
         ctx.strokeStyle = color
@@ -107,6 +107,7 @@ export default class Vector2 {
         // pointe de flèche
         ctx.beginPath()
         ctx.moveTo(endX, endY)
+        
         ctx.lineTo(
             endX - dir.x * size + perp.x * size * 0.5,
             endY - dir.y * size + perp.y * size * 0.5

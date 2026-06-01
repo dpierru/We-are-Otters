@@ -78,7 +78,7 @@ export default class Otter {
         
     }
 
-    draw() {
+    render() {
         //console.log(this.x, this.y)
         for (let circle of this.body) {
             this.renderer.drawCircle(circle.x, circle.y, circle.radius, circle.color)

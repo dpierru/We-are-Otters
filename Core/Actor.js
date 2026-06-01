@@ -2,10 +2,11 @@ import Vector2 from "./Vector2.js"
 
 export default class Actor {
     world = null
+    skin = null
 
-    constructor() {
+    constructor(skin = null) {
         this.position = new Vector2(200, 200)
-        this.velocity = new Vector2(100, 100)
+        this.velocity = new Vector2(150, 150)
         this.target = new Vector2(500, 500)
         this.behaviors = []
     }
@@ -13,6 +14,11 @@ export default class Actor {
     add(behavior) {
         behavior.setOwner(this)
         this.behaviors.push(behavior)
+    }
+
+    setSkin(skin) {
+        this.skin = skin
+        this.skin.attachToActor(this)
     }
 
     attachToWorld(world) {
@@ -27,20 +33,23 @@ export default class Actor {
         for (const behavior of this.behaviors) {
             behavior.update?.(dt, this)
         }
+
+        this.skin?.update(dt)
     }
 
     render(renderer) {       
         for (const behavior of this.behaviors) {
-            behavior.draw?.(renderer, this)
+            behavior.render?.(renderer)
         }
 
-        const ctx = renderer.ctx
+        this.skin?.render(renderer)
 
-        ctx.fillStyle = this.color || "white"
+        // const ctx = renderer.ctx
 
-        ctx.beginPath()
-        ctx.arc(this.position.x, this.position.y, 10, 0, Math.PI * 2)
+        // ctx.fillStyle = this.color || "white"
+        // ctx.beginPath()
+        // ctx.arc(this.position.x, this.position.y, 10, 0, Math.PI * 2)
         
-        ctx.fill()
+        // ctx.fill()
     }
 }

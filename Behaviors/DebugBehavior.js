@@ -10,7 +10,7 @@ export default class DebugBehavior extends Behavior {
         //this.color = "red"
     }
 
-    draw(renderer) {
+    render(renderer) {
         if (!this.showDebug) return
 
         const ctx = renderer.ctx

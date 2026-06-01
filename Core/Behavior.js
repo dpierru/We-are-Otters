@@ -25,5 +25,5 @@ export default class Behavior {
     initWorldAttachement() {}
 
     update(dt) {}
-    draw(renderer) {}
+    render(renderer) {}
 }
