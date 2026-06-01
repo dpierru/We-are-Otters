@@ -17,6 +17,6 @@ export default class DebugBehavior extends Behavior {
         //console.log("DEBUG");
         
         this.owner.target.drawPoint(ctx, this.color || "white")
-        this.owner.velocity.draw(ctx, this.owner.position.x, this.owner.position.y, this.color || "white")
+        //this.owner.velocity.draw(ctx, this.owner.position.x, this.owner.position.y, this.color || "white")
     }
 }
